@@ -93,37 +93,25 @@ const getNoMonth = function (data) {
     for (let i = 0; i < data.length; i++) {
         counter++;
     }
-    return `Total number of months in the dataset: ${counter}`;
+    return `Total Months: ${counter}`;
 };
-
-console.log(getNoMonth(finances));
 
 const getNetProfit = function (data) {
     let profit = 0;
     for (let i = 0; i < data.length; i++) {
         profit += data[i][1];
     }
-    return `Net total amount of profit/losses over the entire period: ${profit}`;
+    return `Total: $${profit}`;
 };
-
-console.log(getNetProfit(finances));
 
 const getAverageChange = function (data) {
     let totalChange = 0;
-    let noMonth = 1;
     for (let i = 1; i < data.length; i++) {
-        noMonth++;
-        if (data[i][1] > data[i - 1][1]) {
-            totalChange += data[i][1] - data[i - 1][1];
-        } else {
-            totalChange += data[i - 1][1] - data[i][1];
-        }
+        totalChange += data[i][1] - data[i - 1][1];
     }
 
-    return `Average Change: ${totalChange / noMonth - 1}`;
+    return `Average Change: ${(totalChange / (data.length - 1)).toFixed(2)}`;
 };
-
-console.log(getAverageChange(finances));
 
 const getMaxIncrease = function (data) {
     let diff = [];
@@ -142,7 +130,38 @@ const getMaxIncrease = function (data) {
     // find the month of the biggest increase
     const maxMonth = increaseMonths[diff.indexOf(max)];
 
-    return `Greatest increase in Profit/Losses was ${max} which happened in ${maxMonth}.`;
+    return `Greatest Increase in Profits/Losses: ${maxMonth} ($${max})`;
 };
 
-console.log(getMaxIncrease(finances));
+const getMaxDecrease = function (data) {
+    let diff = [];
+    let decreaseMonths = [];
+
+    // Loop through dataset and create an array of increases and an array of increase-months
+    for (let i = 1; i < data.length; i++) {
+        if (data[i][1] < data[i - 1][1]) {
+            diff.push(data[i][1] - data[i - 1][1]);
+            decreaseMonths.push(data[i][0]);
+        }
+    }
+    // find the maximum in the array of increases/profits
+    const min = diff.reduce((a, b) => Math.min(a, b));
+
+    // find the month of the biggest increase
+    const minMonth = decreaseMonths[diff.indexOf(min)];
+
+    return `Greatest Decrease in Profits/Losses: ${minMonth} ($${min})`;
+};
+
+const displayAnalysis = function () {
+    const noMonth = getNoMonth(finances);
+    const averageChange = getAverageChange(finances);
+    const maxIncrease = getMaxIncrease(finances);
+    const maxDecrease = getMaxDecrease(finances);
+
+    console.log(
+        `Financial Analysis\n--------------\n${noMonth}\n${averageChange}\n${maxIncrease}\n${maxDecrease}\n`
+    );
+};
+
+displayAnalysis();
