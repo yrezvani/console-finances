@@ -161,12 +161,13 @@ const getMaxDecrease = function (data) {
 // Log everything to the console based on the provided format
 const displayAnalysis = function () {
     const noMonth = getNoMonth(finances);
+    const netProfit = getNetProfit(finances);
     const averageChange = getAverageChange(finances);
     const maxIncrease = getMaxIncrease(finances);
     const maxDecrease = getMaxDecrease(finances);
 
     console.log(
-        `Financial Analysis\n------------------\n${noMonth}\n${averageChange}\n${maxIncrease}\n${maxDecrease}\n`
+        `Financial Analysis\n------------------\n${noMonth}\n${netProfit}\n${averageChange}\n${maxIncrease}\n${maxDecrease}\n`
     );
 };
 
