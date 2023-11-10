@@ -111,18 +111,38 @@ console.log(getNetProfit(finances));
 const getAverageChange = function (data) {
     let totalChange = 0;
     let noMonth = 1;
-    for (let i = 0; i < data.length - 1; i++) {
+    for (let i = 1; i < data.length; i++) {
         noMonth++;
-        if (data[i][1] > data[i + 1][1]) {
-            totalChange += data[i][1] - data[i + 1][1];
+        if (data[i][1] > data[i - 1][1]) {
+            totalChange += data[i][1] - data[i - 1][1];
         } else {
-            totalChange += data[i + 1][1] - data[i][1];
+            totalChange += data[i - 1][1] - data[i][1];
         }
-        console.log(totalChange);
-        console.log(noMonth);
     }
 
     return `Average Change: ${totalChange / noMonth - 1}`;
 };
 
 console.log(getAverageChange(finances));
+
+const getMaxIncrease = function (data) {
+    let diff = [];
+    let increaseMonths = [];
+
+    // Loop through dataset and create an array of increases and an array of increase-months
+    for (let i = 1; i < data.length; i++) {
+        if (data[i][1] > data[i - 1][1]) {
+            diff.push(data[i][1] - data[i - 1][1]);
+            increaseMonths.push(data[i][0]);
+        }
+    }
+    // find the maximum in the array of increases/profits
+    const max = diff.reduce((a, b) => Math.max(a, b));
+
+    // find the month of the biggest increase
+    const maxMonth = increaseMonths[diff.indexOf(max)];
+
+    return `Greatest increase in Profit/Losses was ${max} which happened in ${maxMonth}.`;
+};
+
+console.log(getMaxIncrease(finances));
