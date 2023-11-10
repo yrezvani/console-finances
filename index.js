@@ -166,7 +166,7 @@ const displayAnalysis = function () {
     const maxDecrease = getMaxDecrease(finances);
 
     console.log(
-        `Financial Analysis\n--------------\n${noMonth}\n${averageChange}\n${maxIncrease}\n${maxDecrease}\n`
+        `Financial Analysis\n------------------\n${noMonth}\n${averageChange}\n${maxIncrease}\n${maxDecrease}\n`
     );
 };
 
