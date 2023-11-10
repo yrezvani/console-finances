@@ -87,13 +87,23 @@ var finances = [
     ['Feb-2017', 671099],
 ];
 
-const getNoMonth = function (arr) {
+const getNoMonth = function (data) {
     let counter = 0;
 
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < data.length; i++) {
         counter++;
     }
-    return counter;
+    return `Total number of months in the dataset: ${counter}`;
 };
 
-getNoMonth(finances);
+console.log(getNoMonth(finances));
+
+const getNetProfit = function (data) {
+    let profit = 0;
+    for (let i = 0; i < data.length; i++) {
+        profit += data[i][1];
+    }
+    return `Net total amount of profit/losses over the entire period: ${profit}`;
+};
+
+console.log(getNetProfit(finances));
