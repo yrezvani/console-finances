@@ -107,3 +107,22 @@ const getNetProfit = function (data) {
 };
 
 console.log(getNetProfit(finances));
+
+const getAverageChange = function (data) {
+    let totalChange = 0;
+    let noMonth = 1;
+    for (let i = 0; i < data.length - 1; i++) {
+        noMonth++;
+        if (data[i][1] > data[i + 1][1]) {
+            totalChange += data[i][1] - data[i + 1][1];
+        } else {
+            totalChange += data[i + 1][1] - data[i][1];
+        }
+        console.log(totalChange);
+        console.log(noMonth);
+    }
+
+    return `Average Change: ${totalChange / noMonth - 1}`;
+};
+
+console.log(getAverageChange(finances));
